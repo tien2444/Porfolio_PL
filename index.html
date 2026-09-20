@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio Idea Creator của Vũ Phương Linh — từ insight đến ý tưởng và hiệu quả nội dung." />
+    <meta name="theme-color" content="#10213c" />
+    <title>Vũ Phương Linh — Idea Creator</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffd84d'/%3E%3Cpath d='M18 18h9l5 18 5-18h9L37 48H27z' fill='%2310213c'/%3E%3C/svg%3E" />
+    <style>
+      :root {
+        --ink: #10213c;
+        --paper: #f4f7fb;
+        --white: #ffffff;
+        --signal: #ffd84d;
+        --blue: #2457ff;
+        --muted: #667189;
+        --line: rgba(16, 33, 60, 0.18);
+        --max: 1180px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      [id] { scroll-margin-top: 86px; }
+      body {
+        margin: 0;
+        overflow-x: hidden;
+        color: var(--ink);
+        background:
+          linear-gradient(rgba(16, 33, 60, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 33, 60, 0.045) 1px, transparent 1px),
+          var(--paper);
+        background-size: 32px 32px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      a { color: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      img { display: block; max-width: 100%; }
+      h1, h2, h3, h4 { text-wrap: balance; }
+      p { text-wrap: pretty; }
+      .shell { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+
+      .skip-link {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 99;
+        transform: translateY(-150%);
+        padding: 10px 14px;
+        background: var(--ink);
+        color: var(--white);
+      }
+      .skip-link:focus { transform: translateY(0); }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--line);
+        background: rgba(244, 247, 251, 0.88);
+        backdrop-filter: blur(14px);
+      }
+      .nav {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 850;
+        letter-spacing: -0.03em;
+        text-decoration: none;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        background: var(--signal);
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+        font-size: 14px;
+        transform: rotate(-7deg);
+      }
+      .nav-links { display: flex; align-items: center; gap: 26px; }
+      .nav-links a {
+        font-size: 14px;
+        font-weight: 720;
+        text-decoration: none;
+      }
+      .nav-links a:hover, .nav-links a:focus-visible { text-decoration: underline; text-underline-offset: 5px; }
+      .nav-links .nav-cta {
+        padding: 10px 15px;
+        color: var(--white);
+        background: var(--ink);
+        border-radius: 999px;
+        text-decoration: none;
+      }
+
+      .hero {
+        min-height: calc(100vh - 72px);
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+        align-items: center;
+        gap: clamp(36px, 7vw, 100px);
+        padding: 70px 0 56px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0 0 26px;
+        font-size: 13px;
+        font-weight: 850;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .eyebrow::before { content: ""; width: 30px; height: 3px; background: var(--blue); }
+      h1 {
+        max-width: 790px;
+        margin: 0;
+        font-size: clamp(3.6rem, 8.3vw, 7.7rem);
+        line-height: 0.89;
+        letter-spacing: -0.075em;
+      }
+      h1 .idea {
+        position: relative;
+        display: inline-block;
+        color: var(--blue);
+        font-style: italic;
+        font-weight: 500;
+      }
+      h1 .idea::after {
+        content: "";
+        position: absolute;
+        left: -3%;
+        right: -4%;
+        bottom: -5px;
+        height: 13px;
+        background: var(--signal);
+        z-index: -1;
+        transform: rotate(-1.5deg);
+      }
+      .hero-intro {
+        max-width: 650px;
+        margin: 30px 0 34px;
+        color: #36435b;
+        font-size: clamp(1.08rem, 1.6vw, 1.28rem);
+      }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+      .button {
+        min-height: 50px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 20px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+      .button:hover, .button:focus-visible { transform: translateY(-3px); box-shadow: 5px 5px 0 var(--ink); }
+      .button.primary { background: var(--signal); }
+      .button.secondary { background: var(--white); }
+
+      .portrait-card { position: relative; max-width: 390px; justify-self: end; }
+      .portrait-frame {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4 / 5;
+        border: 3px solid var(--ink);
+        border-radius: 180px 180px 18px 18px;
+        background: #d9dee8;
+        box-shadow: 14px 14px 0 var(--signal);
+      }
+      .portrait-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.04); }
+      .note {
+        position: absolute;
+        right: -12px;
+        bottom: 38px;
+        width: 172px;
+        padding: 18px;
+        background: var(--blue);
+        color: var(--white);
+        border: 2px solid var(--ink);
+        transform: rotate(4deg);
+        box-shadow: 6px 6px 0 var(--ink);
+        font-size: 14px;
+        font-weight: 760;
+      }
+      .note span { display: block; margin-top: 5px; color: #dbe4ff; font-size: 12px; font-weight: 600; }
+
+      .ticker { overflow: hidden; border-block: 2px solid var(--ink); background: var(--ink); color: var(--white); }
+      .ticker-track {
+        width: max-content;
+        display: flex;
+        gap: 22px;
+        padding: 11px 0;
+        animation: ticker 22s linear infinite;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .ticker-track span::after { content: "✦"; margin-left: 22px; color: var(--signal); }
+      @keyframes ticker { to { transform: translateX(-50%); } }
+
+      .section { padding: clamp(88px, 8vw, 108px) 0; }
+      .section-head {
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 34px;
+        margin-bottom: 52px;
+        align-items: start;
+      }
+      .section-kicker { margin: 9px 0 0; color: var(--blue); font-weight: 850; font-size: 14px; line-height: 1.4; }
+      h2 { max-width: 1000px; margin: 0; font-size: clamp(2.5rem, 4.5vw, 4.5rem); line-height: 1; letter-spacing: -0.05em; }
+      .section-copy { max-width: 680px; margin: 20px 0 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
+
+      .project-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+      .project {
+        min-height: 340px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(28px, 3.4vw, 42px);
+        border: 2px solid var(--ink);
+        background: var(--white);
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+      .project:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--ink); }
+      .project:nth-child(1) { grid-column: span 12; background: var(--blue); color: var(--white); }
+      .project:nth-child(2) { grid-column: span 12; background: var(--signal); }
+      .project-top { display: flex; justify-content: space-between; gap: 18px; align-items: start; }
+      .project-index { font-weight: 900; font-size: 13px; line-height: 1.45; letter-spacing: 0.12em; }
+      .project-tag { padding: 6px 10px; border: 1px solid currentColor; border-radius: 999px; font-size: 12px; font-weight: 760; }
+      .project h3 { max-width: 650px; margin: 40px 0 14px; font-size: clamp(2rem, 3.35vw, 3.25rem); line-height: 1.02; letter-spacing: -0.045em; }
+      .project p { max-width: 540px; margin: 0; line-height: 1.65; opacity: 0.75; }
+      .featured-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr);
+        gap: clamp(34px, 7vw, 90px);
+        align-items: center;
+      }
+      .featured-copy { max-width: 650px; }
+      .featured-copy h3 { max-width: 680px; }
+      .featured-copy > p { max-width: 650px; font-size: 17px; }
+      .skill-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 25px 0 0; padding: 0; list-style: none; }
+      .skill-list li { padding: 7px 10px; border: 1px solid rgba(255,255,255,.55); border-radius: 999px; font-size: 12px; font-weight: 780; }
+      .case-link { display: inline-block; margin-top: 26px; color: var(--white); font-weight: 800; text-underline-offset: 5px; }
+      .impact-card {
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 26px;
+        color: var(--ink);
+        background: var(--signal);
+        border: 2px solid var(--ink);
+        box-shadow: 8px 8px 0 var(--ink);
+        transform: rotate(1.5deg);
+      }
+      .impact-card small { font-size: 12px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+      .impact-card strong { display: block; font-size: clamp(4.5rem, 8vw, 7.5rem); line-height: .85; letter-spacing: -.08em; }
+      .impact-card p { opacity: 1; font-weight: 800; line-height: 1.45; }
+      .case-story {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        margin-top: 46px;
+        color: var(--ink);
+        background: rgba(255,255,255,.28);
+        border: 1px solid rgba(255,255,255,.35);
+      }
+      .story-item { min-height: 190px; padding: 24px; background: rgba(16,33,60,.18); }
+      .story-item span { color: var(--signal); font-size: 12px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+      .story-item h4 { margin: 38px 0 8px; color: var(--white); font-size: 20px; }
+      .story-item p { color: #dce5ff; font-size: 14px; opacity: 1; }
+      .channel-proof { margin-top: 46px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.36); }
+      .proof-head { display: flex; justify-content: space-between; gap: 22px; align-items: end; margin-bottom: 22px; }
+      .proof-head h4 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.7rem); letter-spacing: -.04em; }
+      .proof-head p { max-width: 510px; color: #dce5ff; font-size: 14px; opacity: 1; }
+      .channel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .channel-card { overflow: hidden; margin: 0; color: var(--ink); background: var(--white); border: 2px solid var(--ink); }
+      .channel-image { overflow: hidden; aspect-ratio: 16 / 9; background: #dfe5ef; }
+      .channel-image img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 420ms ease; }
+      .channel-card:hover img { transform: scale(1.018); }
+      .channel-caption { display: flex; justify-content: space-between; gap: 18px; padding: 18px; }
+      .channel-caption strong { display: block; font-size: 18px; }
+      .channel-caption span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; }
+      .channel-caption a { align-self: center; flex: 0 0 auto; font-weight: 850; text-underline-offset: 4px; }
+      .commerce-layout {
+        display: grid;
+        grid-template-columns: minmax(0, .82fr) minmax(420px, 1.18fr);
+        gap: clamp(34px, 6vw, 80px);
+        align-items: center;
+      }
+      .commerce-copy h3 { max-width: 700px; }
+      .commerce-copy > p { max-width: 600px; font-size: 17px; opacity: .82; }
+      .commerce-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; }
+      .commerce-tags li { padding: 7px 10px; border: 1px solid var(--ink); border-radius: 999px; font-size: 12px; font-weight: 800; }
+      .commerce-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+      .commerce-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 15px; background: rgba(255,255,255,.5); border: 2px solid var(--ink); border-radius: 999px; font-size: 14px; font-weight: 850; text-decoration: none; white-space: nowrap; transition: transform 180ms ease, box-shadow 180ms ease; }
+      .commerce-link:hover, .commerce-link:focus-visible { transform: translateY(-2px); box-shadow: 4px 4px 0 var(--ink); }
+      .commerce-proof { overflow: hidden; margin: 36px 0 0; background: var(--white); border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
+      .commerce-image { overflow: hidden; aspect-ratio: 16 / 9; background: #fff7dd; }
+      .commerce-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1.22); transform-origin: center 62%; transition: transform 420ms ease; }
+      .commerce-proof:hover img { transform: scale(1.25); }
+      .commerce-caption { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 18px; }
+      .commerce-caption strong { display: block; font-size: 18px; }
+      .commerce-caption span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; }
+      .commerce-caption a { flex: 0 0 auto; font-weight: 850; text-underline-offset: 4px; }
+      .commerce-scope {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        margin-top: 38px;
+        padding: 1px;
+        color: var(--white);
+        background: var(--ink);
+      }
+      .commerce-scope article { min-height: 160px; padding: 22px; color: var(--ink); background: var(--signal); }
+      .commerce-scope span { display: block; font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+      .commerce-scope h4 { margin: 32px 0 6px; font-size: 18px; }
+      .commerce-scope p { margin: 0; font-size: 13px; opacity: .72; }
+
+      .method { background: var(--ink); color: var(--white); }
+      .method .section-kicker { color: var(--signal); }
+      .steps {
+        counter-reset: step;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        padding: 1px;
+        background: rgba(255,255,255,.22);
+      }
+      .step { min-height: 220px; padding: 24px; background: var(--ink); }
+      .step::before { counter-increment: step; content: "0" counter(step); display: block; color: var(--signal); font-size: 13px; font-weight: 900; }
+      .step h3 { margin: 52px 0 6px; font-size: 20px; }
+      .step p { margin: 0; color: #aebbd0; font-size: 14px; }
+      .stack-intro {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 28px;
+        margin: 68px 0 22px;
+      }
+      .stack-intro h3 { max-width: 620px; margin: 0; font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; letter-spacing: -.045em; }
+      .stack-intro p { max-width: 470px; margin: 0; color: #aebbd0; font-size: 14px; }
+      .stack-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .stack-panel { padding: 26px; border: 1px solid rgba(255,255,255,.24); background: rgba(255,255,255,.045); }
+      .stack-panel-head { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 22px; }
+      .stack-panel h4 { margin: 0; font-size: 22px; letter-spacing: -.025em; }
+      .stack-label { color: var(--signal); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+      .tool-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+      .tool-item {
+        min-height: 96px;
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+        padding: 16px;
+        color: var(--white);
+        background: rgba(255,255,255,.055);
+        border: 1px solid rgba(255,255,255,.12);
+        text-decoration: none;
+        transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+      }
+      a.tool-item:hover, a.tool-item:focus-visible { transform: translateX(4px); border-color: var(--signal); background: rgba(255,216,77,.08); }
+      .tool-mark {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        background: var(--white);
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px rgba(255,216,77,.72);
+      }
+      .tool-mark img { width: 24px; height: 24px; object-fit: contain; }
+      .tool-mark--dual { display: flex; padding: 8px; }
+      .tool-mark--dual img { width: 18px; height: 18px; }
+      .tool-mark--dual img + img { margin-left: -4px; }
+      .tool-copy strong { display: block; margin-bottom: 3px; font-size: 15px; }
+      .tool-copy span { display: block; color: #aebbd0; font-size: 13px; line-height: 1.45; }
+
+      .results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+      .result { padding: 28px; border-top: 3px solid var(--ink); background: rgba(255,255,255,.65); }
+      .result strong { display: block; font-size: clamp(2.5rem, 4.8vw, 5rem); line-height: 1; letter-spacing: -0.065em; }
+      .result span { display: block; margin-top: 13px; color: var(--muted); font-weight: 690; }
+      .result.revenue { color: var(--white); background: var(--blue); border-color: var(--signal); }
+      .result.revenue span { color: #dce5ff; }
+
+      .contact {
+        margin: 0 auto 42px;
+        padding: clamp(34px, 6vw, 76px);
+        background: var(--signal);
+        border: 3px solid var(--ink);
+        box-shadow: 12px 12px 0 var(--ink);
+      }
+      .contact p { max-width: 600px; font-size: 18px; }
+      .contact .email { display: inline-block; margin-top: 16px; font-size: clamp(1.25rem, 3vw, 2.7rem); font-weight: 900; letter-spacing: -0.04em; text-underline-offset: 7px; }
+      footer { display: flex; justify-content: space-between; gap: 20px; padding: 34px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 980px) {
+        .commerce-layout { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 820px) {
+        .nav-links a:not(.nav-cta) { display: none; }
+        .hero { min-height: auto; grid-template-columns: 1fr; padding-top: 54px; }
+        .portrait-card { width: min(86%, 380px); justify-self: center; margin-right: 20px; }
+        .section { padding: 78px 0; }
+        .section-head { grid-template-columns: 1fr; gap: 18px; margin-bottom: 38px; }
+        .section-kicker { margin-top: 0; }
+        .project:nth-child(n) { grid-column: span 12; min-height: 300px; }
+        .featured-layout { grid-template-columns: 1fr; }
+        .impact-card { min-height: 220px; transform: none; }
+        .case-story { grid-template-columns: 1fr; }
+        .story-item { min-height: 160px; }
+        .channel-grid { grid-template-columns: 1fr; }
+        .proof-head { align-items: start; flex-direction: column; }
+        .commerce-layout { grid-template-columns: 1fr; }
+        .commerce-scope { grid-template-columns: 1fr; }
+        .commerce-scope article { min-height: 140px; }
+        .steps { grid-template-columns: 1fr 1fr; }
+        .step { min-height: 180px; }
+        .stack-intro { align-items: start; flex-direction: column; }
+        .stack-grid { grid-template-columns: 1fr; }
+        .results { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 520px) {
+        .shell { width: min(calc(100% - 28px), var(--max)); }
+        .brand { font-size: 14px; }
+        h1 { font-size: clamp(3.25rem, 17vw, 5rem); }
+        h2 { font-size: clamp(2.45rem, 12vw, 3.25rem); }
+        .project { padding: 28px; }
+        .project-top { align-items: flex-start; flex-direction: column; gap: 12px; }
+        .project h3 { margin-top: 32px; }
+        .note { right: -12px; bottom: 22px; width: 152px; }
+        .channel-caption { align-items: flex-start; flex-direction: column; }
+        .channel-caption a { align-self: flex-start; }
+        .commerce-proof { box-shadow: 5px 5px 0 var(--ink); }
+        .commerce-caption { align-items: flex-start; flex-direction: column; }
+        .steps { grid-template-columns: 1fr; }
+        .step { min-height: 164px; }
+        .step h3 { margin-top: 34px; }
+        .stack-panel { padding: 18px; }
+        .stack-panel-head { align-items: flex-start; flex-direction: column; gap: 5px; }
+        .tool-item { grid-template-columns: 38px minmax(0, 1fr); padding: 14px; }
+        .tool-mark { width: 38px; height: 38px; }
+        footer { flex-direction: column; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .ticker-track { animation: none; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Đi thẳng tới nội dung</a>
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Điều hướng chính">
+        <a class="brand" href="#top"><span class="brand-mark">VL</span> Vũ Phương Linh</a>
+        <div class="nav-links">
+          <a href="#du-an">Dự án</a>
+          <a href="#quy-trinh">Framework</a>
+          <a href="#ket-qua">Kết quả</a>
+          <a class="nav-cta" href="#lien-he">Liên hệ ↗</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero shell" id="top">
+        <div>
+          <p class="eyebrow">Idea Creator · TikTok & Meta Creative Strategy</p>
+          <h1>Insight thành <span class="idea">idea.</span><br />Idea thành content.</h1>
+          <p class="hero-intro">Mình nghiên cứu điều người xem quan tâm, phát triển concept và biến chúng thành nội dung ngắn vừa dễ nhớ, vừa tạo ra tác động kinh doanh có thể đo lường.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#du-an">Xem dự án <span aria-hidden="true">↓</span></a>
+            <a class="button secondary" href="mailto:linhphuongvu11@gmail.com">Gửi email <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <aside class="portrait-card" aria-label="Chân dung Vũ Phương Linh">
+          <div class="portrait-frame"><img src="portrait.png" alt="Vũ Phương Linh" /></div>
+          <div class="note">Một ý tưởng tốt bắt đầu bằng một câu hỏi đúng.<span>— Linh's idea note</span></div>
+        </aside>
+      </section>
+
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>Meta Ads Library</span><span>TikTok Creative Center</span><span>Social listening</span><span>AI prototyping</span><span>Creative analysis</span>
+          <span>Meta Ads Library</span><span>TikTok Creative Center</span><span>Social listening</span><span>AI prototyping</span><span>Creative analysis</span>
+        </div>
+      </div>
+
+      <section class="section shell reveal" id="du-an">
+        <div class="section-head">
+          <p class="section-kicker">01 / SELECTED WORK</p>
+          <div><h2>Ý tưởng được chứng minh bằng kết quả.</h2><p class="section-copy">Mỗi dự án cho thấy cách mình đi từ research, insight và creative concept đến hiệu suất nội dung và chuyển đổi kinh doanh.</p></div>
+        </div>
+        <div class="project-grid">
+          <article class="project project--featured">
+            <div class="project-top"><span class="project-index">PROJECT 01 · YUM NETWORK · 12/2025–30/08/2026</span><span class="project-tag">TikTok & Meta Ads</span></div>
+            <div class="featured-layout">
+              <div class="featured-copy">
+                <h3>Yum 24h × Tư Duy Lãnh Đạo</h3>
+                <p>Với vai trò Idea Creator, mình nghiên cứu thị trường, xu hướng và audience insight; xây content pillars, creative concept và kịch bản cho TikTok, Facebook Reels và Meta Ads. Nội dung được điều chỉnh theo từng tệp người xem: giải trí – xu hướng ở Yum 24h và quản trị – kinh doanh ở Tư Duy Lãnh Đạo.</p>
+                <ul class="skill-list" aria-label="Năng lực sử dụng trong dự án">
+                  <li>Market research</li><li>Audience insight</li><li>Content strategy</li><li>Creative concept</li><li>Scriptwriting</li><li>Performance analysis</li>
+                </ul>
+                <a class="case-link" href="https://www.facebook.com/profile.php?id=61575526722270" target="_blank" rel="noreferrer">Xem hệ thống nội dung ↗</a>
+              </div>
+              <div class="impact-card">
+                <small>Business impact</small>
+                <div><strong>300M</strong><p>Góp phần cùng team đưa page đạt 300 triệu đồng doanh thu trong tháng chuyển đổi tốt nhất.</p></div>
+              </div>
+            </div>
+            <div class="case-story">
+              <div class="story-item"><span>01 / Bài toán</span><h4>Giữ sự chú ý ở hai tệp khán giả</h4><p>Biến tin tức giải trí và kiến thức quản trị thành nội dung ngắn, dễ hiểu, có hook rõ và phù hợp với hành vi xem nhanh.</p></div>
+              <div class="story-item"><span>02 / Cách làm</span><h4>Research trước, concept sau</h4><p>Phân tích trend, insight, đối thủ và dữ liệu hiệu suất để xây content pillars, format diễn xuất và nhiều biến thể creative.</p></div>
+              <div class="story-item"><span>03 / Kết quả</span><h4>Từ lượt xem đến chuyển đổi</h4><p>Hệ thống nội dung tạo độ phủ lớn trên TikTok, đồng thời hỗ trợ page đạt mốc doanh thu 300 triệu đồng trong tháng tốt nhất.</p></div>
+            </div>
+            <div class="channel-proof">
+              <div class="proof-head">
+                <h4>Kênh mình tham gia phát triển</h4>
+                <p>Hình ảnh thực tế giúp nhà tuyển dụng nhìn thấy quy mô kênh, phong cách creative và sự khác biệt giữa từng nhóm nội dung.</p>
+              </div>
+              <div class="channel-grid">
+                <figure class="channel-card">
+                  <div class="channel-image"><img src="yum24h-tiktok-channel.jpg" loading="lazy" alt="Trang TikTok Yum 24h với các video nổi bật" /></div>
+                  <figcaption class="channel-caption"><div><strong>Yum 24h · TikTok</strong><span>56,9K followers · 5,6M lượt thích</span></div><a href="https://www.tiktok.com/@yum.24h" target="_blank" rel="noreferrer">Xem kênh ↗</a></figcaption>
+                </figure>
+                <figure class="channel-card">
+                  <div class="channel-image"><img src="tu-duy-lanh-dao-facebook.jpg" loading="lazy" alt="Thư viện video Facebook Reels của Tư Duy Lãnh Đạo" /></div>
+                  <figcaption class="channel-caption"><div><strong>Tư Duy Lãnh Đạo · Facebook</strong><span>36K followers · Nội dung quản trị và kinh doanh</span></div><a href="https://www.facebook.com/profile.php?id=61575526722270" target="_blank" rel="noreferrer">Xem page ↗</a></figcaption>
+                </figure>
+              </div>
+            </div>
+          </article>
+          <article class="project project--commerce">
+            <div class="project-top"><span class="project-index">PROJECT 02 · KOCIKIDS · 01/2025–10/2025</span><span class="project-tag">Shopee · TikTok Shop</span></div>
+            <div class="commerce-layout">
+              <div class="commerce-copy">
+                <h3>Kocikids · Xây dựng content sàn</h3>
+                <p>Mình phụ trách phát triển hình ảnh và nội dung thương mại điện tử cho các gian hàng Kocikids Official, Shop Mẹ Nhép trên Shopee và nội dung TikTok: từ visual sản phẩm, bài post trên sàn đến image ads phục vụ quảng cáo.</p>
+                <ul class="commerce-tags" aria-label="Hạng mục thực hiện cho Kocikids">
+                  <li>E-commerce content</li><li>Shopee post</li><li>TikTok Shop</li><li>Product visual</li><li>Image ads</li>
+                </ul>
+                <div class="commerce-links" aria-label="Các gian hàng Shopee">
+                  <a class="commerce-link" href="https://shopee.vn/kocikids.official" target="_blank" rel="noreferrer">Kocikids Official ↗</a>
+                  <a class="commerce-link" href="https://shopee.vn/shopmenhep" target="_blank" rel="noreferrer">Shop Mẹ Nhép ↗</a>
+                </div>
+              </div>
+              <figure class="commerce-proof">
+                <div class="commerce-image"><img src="kocikids-shopee-store.jpg" loading="lazy" alt="Gian hàng Kocikids Official Store trên Shopee Mall" /></div>
+                <figcaption class="commerce-caption"><div><strong>Kocikids Official Store</strong><span>Shopee Mall · Hệ thống visual và bài post sản phẩm</span></div><a href="https://shopee.vn/kocikids.official" target="_blank" rel="noreferrer">Xem shop ↗</a></figcaption>
+              </figure>
+            </div>
+            <div class="commerce-scope" aria-label="Phạm vi công việc tại Kocikids">
+              <article><span>01 / Hình ảnh</span><h4>Product visual</h4><p>Sắp xếp thông tin và lợi ích sản phẩm thành hình ảnh dễ quét trên màn hình mobile.</p></article>
+              <article><span>02 / Nội dung sàn</span><h4>Shopee & TikTok</h4><p>Xây nội dung theo từng ngành hàng, điểm bán và hành vi mua sắm trên mỗi nền tảng.</p></article>
+              <article><span>03 / Quảng cáo</span><h4>Image ads</h4><p>Phát triển nhiều góc thông điệp và biến thể visual để phục vụ hoạt động quảng cáo.</p></article>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section method" id="quy-trinh">
+        <div class="shell">
+          <div class="section-head">
+            <p class="section-kicker">02 / FRAMEWORK</p>
+            <div><h2>Research thành hệ thống, không chỉ là tìm trend.</h2><p class="section-copy" style="color:#aebbd0">Mình kết hợp dữ liệu nền tảng, hành vi social và hiệu suất creative để đi từ tín hiệu thị trường đến concept có thể test và scale.</p></div>
+          </div>
+          <div class="steps">
+            <article class="step"><h3>Scan tín hiệu</h3><p>Quét quảng cáo, trend, nội dung nổi bật và thảo luận đang tăng trên social.</p></article>
+            <article class="step"><h3>Decode insight</h3><p>Giải mã pain point, mong muốn, hook, offer và kiểu phản hồi của từng audience.</p></article>
+            <article class="step"><h3>Build angles</h3><p>Ghép vấn đề × mong muốn × mâu thuẫn để tạo nhiều góc kể cho cùng một brief.</p></article>
+            <article class="step"><h3>Prototype nhanh</h3><p>Dùng AI để dựng script, storyboard, hình ảnh và video nháp trước khi sản xuất.</p></article>
+            <article class="step"><h3>Test creative</h3><p>Thử nhiều hook, format, visual và CTA trên organic lẫn paid media.</p></article>
+            <article class="step"><h3>Learn & scale</h3><p>Đọc retention, CTR, CVR và phản hồi để nhân rộng pattern đang thắng.</p></article>
+          </div>
+
+          <div class="stack-intro">
+            <h3>Nền tảng giúp mình research và biến insight thành creative.</h3>
+            <p>Mỗi công cụ đảm nhiệm một phần rõ ràng trong workflow, từ tìm tín hiệu, kiểm chứng ý tưởng đến sản xuất asset để test.</p>
+          </div>
+          <div class="stack-grid">
+            <article class="stack-panel">
+              <div class="stack-panel-head"><h4>Research Stack</h4><span class="stack-label">Find the signal</span></div>
+              <ul class="tool-list">
+                <li><a class="tool-item" href="https://www.facebook.com/ads/library/" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="meta.svg" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>Meta Ads Library ↗</strong><span>Quan sát quảng cáo đang chạy, creative pattern, offer và thông điệp của thị trường.</span></span></a></li>
+                <li><a class="tool-item" href="https://ads.tiktok.com/business/creativecenter/" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="tiktok.svg" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>TikTok Creative Center ↗</strong><span>Tìm trend, Top Ads, âm thanh, hashtag và format có tín hiệu tốt theo ngành.</span></span></a></li>
+                <li><a class="tool-item" href="https://www.tiktok.com/search" target="_blank" rel="noreferrer"><span class="tool-mark tool-mark--dual"><img src="tiktok.svg" alt="" aria-hidden="true" /><img src="facebook.svg" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>Social listening ↗</strong><span>Đọc comment TikTok/Facebook, search suggestion, group và creator content để thu thập ngôn ngữ thật của audience.</span></span></a></li>
+                <li><a class="tool-item" href="https://trends.google.com/" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="google-trends.ico" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>Google Trends ↗</strong><span>Kiểm tra mức quan tâm, tính mùa vụ và so sánh nhu cầu tìm kiếm giữa các chủ đề.</span></span></a></li>
+              </ul>
+            </article>
+            <article class="stack-panel">
+              <div class="stack-panel-head"><h4>AI & Production Stack</h4><span class="stack-label">Make it testable</span></div>
+              <ul class="tool-list">
+                <li><a class="tool-item" href="https://chatgpt.com/" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="openai.svg" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>ChatGPT ↗</strong><span>Tổng hợp research, mở rộng content angle, phát triển hook và xây nhiều phiên bản script.</span></span></a></li>
+                <li><a class="tool-item" href="https://openai.com/codex/" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="openai.svg" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>Codex ↗</strong><span>Dựng landing page, prototype tương tác và tự động hóa các phần việc lặp lại.</span></span></a></li>
+                <li><a class="tool-item" href="https://labs.google/fx/tools/flow" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="google-brand.svg" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>Google Flow + Veo 3.1 ↗</strong><span>Gen video concept, thử chuyển động và tạo bản demo trước khi quay thật.</span></span></a></li>
+                <li><a class="tool-item" href="https://help.openai.com/en/articles/11084440-creating-images-in-chatgpt" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="openai.svg" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>ChatGPT Images ↗</strong><span>Tạo key visual, moodboard, storyboard và biến thể hình ảnh cho từng angle.</span></span></a></li>
+                <li><a class="tool-item" href="https://www.capcut.com/" target="_blank" rel="noreferrer"><span class="tool-mark"><img src="capcut.ico" alt="" aria-hidden="true" /></span><span class="tool-copy"><strong>CapCut ↗</strong><span>Dựng video dọc, subtitle, nhịp cắt và hoàn thiện nhiều biến thể creative.</span></span></a></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell reveal" id="ket-qua">
+        <div class="section-head">
+          <p class="section-kicker">03 / IMPACT</p>
+          <div><h2>Sáng tạo có dấu vết.</h2><p class="section-copy">Kết quả tiêu biểu trong quá trình nghiên cứu, sản xuất và tối ưu hệ thống nội dung tại Yum Network.</p></div>
+        </div>
+        <div class="results">
+          <div class="result revenue"><strong>300M</strong><span>Doanh thu trong tháng chuyển đổi tốt nhất</span></div>
+          <div class="result"><strong>14M</strong><span>Lượt xem trong một tháng</span></div>
+          <div class="result"><strong>70%</strong><span>Retention trung bình</span></div>
+          <div class="result"><strong>42–45</strong><span>Video được sản xuất mỗi tháng</span></div>
+        </div>
+      </section>
+
+      <section class="section shell" id="lien-he">
+        <div class="contact reveal">
+          <p class="section-kicker">04 / LET'S TALK</p>
+          <h2>Có một brief cần<br />một góc nhìn mới?</h2>
+          <p>Mình sẵn sàng trò chuyện về content strategy, video ngắn và những ý tưởng đáng thử.</p>
+          <a class="email" href="mailto:linhphuongvu11@gmail.com">linhphuongvu11@gmail.com ↗</a>
+        </div>
+        <footer><span>© 2026 Vũ Phương Linh</span><span>Idea Creator · Hà Nội</span></footer>
+      </section>
+    </main>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+    </script>
+  </body>
+</html>
