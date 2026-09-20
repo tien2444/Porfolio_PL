@@ -399,6 +399,23 @@
       .tool-copy strong { display: block; margin-bottom: 3px; font-size: 15px; }
       .tool-copy span { display: block; color: #aebbd0; font-size: 13px; line-height: 1.45; }
 
+      .education-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr); gap: 18px; }
+      .credential {
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(26px, 4vw, 42px);
+        background: var(--white);
+        border: 2px solid var(--ink);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+      .credential--primary { color: var(--white); background: var(--blue); }
+      .credential-label { font-size: 12px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+      .credential strong { display: block; max-width: 720px; margin-top: 54px; font-size: clamp(2rem, 4vw, 4rem); line-height: 1; letter-spacing: -.045em; }
+      .credential p { margin: 12px 0 0; color: var(--muted); font-size: 16px; font-weight: 700; }
+      .credential--primary p { color: #dce5ff; }
+
       .results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
       .result { padding: 28px; border-top: 3px solid var(--ink); background: rgba(255,255,255,.65); }
       .result strong { display: block; font-size: clamp(2.5rem, 4.8vw, 5rem); line-height: 1; letter-spacing: -0.065em; }
@@ -414,7 +431,8 @@
         box-shadow: 12px 12px 0 var(--ink);
       }
       .contact p { max-width: 600px; font-size: 18px; }
-      .contact .email { display: inline-block; margin-top: 16px; font-size: clamp(1.25rem, 3vw, 2.7rem); font-weight: 900; letter-spacing: -0.04em; text-underline-offset: 7px; }
+      .contact-links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 22px; }
+      .contact-link { display: inline-block; font-size: clamp(1.15rem, 2.7vw, 2.35rem); font-weight: 900; letter-spacing: -0.04em; text-underline-offset: 7px; }
       footer { display: flex; justify-content: space-between; gap: 20px; padding: 34px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
       .reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
@@ -445,6 +463,7 @@
         .step { min-height: 180px; }
         .stack-intro { align-items: start; flex-direction: column; }
         .stack-grid { grid-template-columns: 1fr; }
+        .education-grid { grid-template-columns: 1fr; }
         .results { grid-template-columns: 1fr; }
       }
 
@@ -487,6 +506,7 @@
         <div class="nav-links">
           <a href="#du-an">Dự án</a>
           <a href="#quy-trinh">Framework</a>
+          <a href="#education">Education</a>
           <a href="#ket-qua">Kết quả</a>
           <a class="nav-cta" href="#lien-he">Liên hệ ↗</a>
         </div>
@@ -638,9 +658,26 @@
         </div>
       </section>
 
+      <section class="section shell reveal" id="education">
+        <div class="section-head">
+          <p class="section-kicker">03 / EDUCATION</p>
+          <div><h2>Education &amp; credentials.</h2><p class="section-copy">Academic training and English proficiency that support structured research, clear communication and creative development.</p></div>
+        </div>
+        <div class="education-grid">
+          <article class="credential credential--primary">
+            <span class="credential-label">Education</span>
+            <div><strong>Diplomatic Academy of Vietnam</strong><p>Bachelor's Degree</p></div>
+          </article>
+          <article class="credential">
+            <span class="credential-label">English Certification</span>
+            <div><strong>TOEIC 700+</strong><p>English proficiency</p></div>
+          </article>
+        </div>
+      </section>
+
       <section class="section shell reveal" id="ket-qua">
         <div class="section-head">
-          <p class="section-kicker">03 / IMPACT</p>
+          <p class="section-kicker">04 / IMPACT</p>
           <div><h2>Sáng tạo có dấu vết.</h2><p class="section-copy">Kết quả tiêu biểu trong quá trình nghiên cứu, sản xuất và tối ưu hệ thống nội dung tại Yum Network.</p></div>
         </div>
         <div class="results">
@@ -653,10 +690,13 @@
 
       <section class="section shell" id="lien-he">
         <div class="contact reveal">
-          <p class="section-kicker">04 / LET'S TALK</p>
+          <p class="section-kicker">05 / LET'S TALK</p>
           <h2>Có một brief cần<br />một góc nhìn mới?</h2>
           <p>Mình sẵn sàng trò chuyện về content strategy, video ngắn và những ý tưởng đáng thử.</p>
-          <a class="email" href="mailto:linhphuongvu11@gmail.com">linhphuongvu11@gmail.com ↗</a>
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:linhphuongvu11@gmail.com">linhphuongvu11@gmail.com ↗</a>
+            <a class="contact-link" href="tel:+84977678694">+84 977 678 694 ↗</a>
+          </div>
         </div>
         <footer><span>© 2026 Vũ Phương Linh</span><span>Idea Creator · Hà Nội</span></footer>
       </section>
