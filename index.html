@@ -297,6 +297,27 @@
       .channel-caption strong { display: block; font-size: 18px; }
       .channel-caption span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; }
       .channel-caption a { align-self: center; flex: 0 0 auto; font-weight: 850; text-underline-offset: 4px; }
+      .paid-proof {
+        display: grid;
+        grid-template-columns: minmax(290px, .72fr) minmax(480px, 1.28fr);
+        margin-top: 18px;
+        overflow: hidden;
+        color: var(--ink);
+        background: var(--white);
+        border: 2px solid var(--ink);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+      .paid-proof-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(26px, 4vw, 46px); }
+      .paid-proof-kicker { color: var(--blue); font-size: 12px; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
+      .paid-proof h4 { margin: 14px 0 12px; color: var(--ink); font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1; letter-spacing: -.045em; }
+      .paid-proof-copy > p { color: var(--muted); font-size: 14px; opacity: 1; }
+      .paid-proof-list { display: flex; flex-wrap: wrap; gap: 7px; margin: 22px 0 0; padding: 0; list-style: none; }
+      .paid-proof-list li { padding: 7px 9px; background: #edf2ff; border: 1px solid var(--ink); border-radius: 999px; font-size: 11px; font-weight: 850; }
+      .paid-proof-media { margin: 0; background: #e8edf5; border-left: 2px solid var(--ink); }
+      .paid-proof-image { overflow: hidden; aspect-ratio: 16 / 8.9; }
+      .paid-proof-image img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 420ms ease; }
+      .paid-proof:hover .paid-proof-image img { transform: scale(1.015); }
+      .paid-proof-media figcaption { padding: 12px 16px; color: var(--muted); background: var(--white); border-top: 1px solid var(--line); font-size: 12px; font-weight: 700; }
       .commerce-layout {
         display: grid;
         grid-template-columns: minmax(0, .82fr) minmax(420px, 1.18fr);
@@ -341,25 +362,14 @@
 
       .method { background: var(--ink); color: var(--white); }
       .method .section-kicker { color: var(--signal); }
-      .steps {
-        counter-reset: step;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        padding: 1px;
-        background: rgba(255,255,255,.22);
-      }
-      .step { min-height: 220px; padding: 24px; background: var(--ink); }
-      .step::before { counter-increment: step; content: "0" counter(step); display: block; color: var(--signal); font-size: 13px; font-weight: 900; }
-      .step h3 { margin: 52px 0 6px; font-size: 20px; }
-      .step p { margin: 0; color: #aebbd0; font-size: 14px; }
       .stack-intro {
         display: flex;
         justify-content: space-between;
         align-items: end;
         gap: 28px;
-        margin: 68px 0 22px;
+        margin: 0 0 22px;
       }
+      .stack-intro .section-kicker { margin-bottom: 18px; }
       .stack-intro h3 { max-width: 620px; margin: 0; font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1; letter-spacing: -.045em; }
       .stack-intro p { max-width: 470px; margin: 0; color: #aebbd0; font-size: 14px; }
       .stack-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
@@ -455,11 +465,11 @@
         .story-item { min-height: 160px; }
         .channel-grid { grid-template-columns: 1fr; }
         .proof-head { align-items: start; flex-direction: column; }
+        .paid-proof { grid-template-columns: 1fr; }
+        .paid-proof-media { border-top: 2px solid var(--ink); border-left: 0; }
         .commerce-layout { grid-template-columns: 1fr; }
         .commerce-scope { grid-template-columns: 1fr; }
         .commerce-scope article { min-height: 140px; }
-        .steps { grid-template-columns: 1fr 1fr; }
-        .step { min-height: 180px; }
         .stack-intro { align-items: start; flex-direction: column; }
         .stack-grid { grid-template-columns: 1fr; }
         .education-grid { grid-template-columns: 1fr; }
@@ -480,9 +490,6 @@
         .commerce-proof { box-shadow: 5px 5px 0 var(--ink); }
         .commerce-gallery { grid-template-columns: 1fr; }
         .commerce-caption { align-items: flex-start; flex-direction: column; }
-        .steps { grid-template-columns: 1fr; }
-        .step { min-height: 164px; }
-        .step h3 { margin-top: 34px; }
         .stack-panel { padding: 18px; }
         .stack-panel-head { align-items: flex-start; flex-direction: column; gap: 5px; }
         .tool-item { grid-template-columns: 38px minmax(0, 1fr); padding: 14px; }
@@ -504,7 +511,7 @@
         <a class="brand" href="#top"><span class="brand-mark">VL</span> Vũ Phương Linh</a>
         <div class="nav-links">
           <a href="#du-an">Dự án</a>
-          <a href="#quy-trinh">Framework</a>
+          <a href="#cong-cu">Công cụ</a>
           <a href="#education">Học vấn</a>
           <a href="#ket-qua">Kết quả</a>
           <a class="nav-cta" href="#lien-he">Liên hệ ↗</a>
@@ -547,9 +554,9 @@
             <div class="featured-layout">
               <div class="featured-copy">
                 <h3>Yum 24h × Tư Duy Lãnh Đạo</h3>
-                <p>Với vai trò Idea Creator, mình nghiên cứu thị trường, xu hướng và audience insight; xây content pillars, creative concept và kịch bản cho TikTok, Facebook Reels và Meta Ads. Nội dung được điều chỉnh theo từng tệp người xem: giải trí – xu hướng ở Yum 24h và quản trị – kinh doanh ở Tư Duy Lãnh Đạo.</p>
+                <p>Với vai trò Idea Creator, mình nghiên cứu thị trường, xu hướng và audience insight; xây content pillars, creative concept, kịch bản cho TikTok, Facebook Reels và phát triển các góc creative phục vụ Meta Ads. Nội dung được điều chỉnh theo từng tệp người xem: giải trí – xu hướng ở Yum 24h và quản trị – kinh doanh ở Tư Duy Lãnh Đạo.</p>
                 <ul class="skill-list" aria-label="Năng lực sử dụng trong dự án">
-                  <li>Market research</li><li>Audience insight</li><li>Content strategy</li><li>Creative concept</li><li>Scriptwriting</li><li>Performance analysis</li>
+                  <li>Market research</li><li>Audience insight</li><li>Content strategy</li><li>Creative concept</li><li>Scriptwriting</li><li>Meta Ads creative</li><li>Performance analysis</li>
                 </ul>
                 <a class="case-link" href="https://www.facebook.com/profile.php?id=61575526722270" target="_blank" rel="noreferrer">Xem hệ thống nội dung ↗</a>
               </div>
@@ -574,10 +581,24 @@
                   <figcaption class="channel-caption"><div><strong>Yum 24h · TikTok</strong><span>56,9K followers · 5,6M lượt thích</span></div><a href="https://www.tiktok.com/@yum.24h" target="_blank" rel="noreferrer">Xem kênh ↗</a></figcaption>
                 </figure>
                 <figure class="channel-card">
-                  <div class="channel-image"><img src="tu-duy-lanh-dao-facebook.jpg" loading="lazy" alt="Thư viện video Facebook Reels của Tư Duy Lãnh Đạo"></div>
-                  <figcaption class="channel-caption"><div><strong>Tư Duy Lãnh Đạo · Facebook</strong><span>36K followers · Nội dung quản trị và kinh doanh</span></div><a href="https://www.facebook.com/profile.php?id=61575526722270" target="_blank" rel="noreferrer">Xem page ↗</a></figcaption>
+                  <div class="channel-image"><img src="tu-duy-lanh-dao-page-management.webp" loading="lazy" alt="Thư viện nội dung Facebook Reels trên page Tư Duy Lãnh Đạo"></div>
+                  <figcaption class="channel-caption"><div><strong>Tư Duy Lãnh Đạo · Facebook</strong><span>Hệ thống Reels về quản trị, kinh doanh và dịch vụ</span></div><a href="https://www.facebook.com/profile.php?id=61575526722270" target="_blank" rel="noreferrer">Xem page ↗</a></figcaption>
                 </figure>
               </div>
+              <article class="paid-proof" aria-label="Kinh nghiệm phát triển creative cho Meta Ads">
+                <div class="paid-proof-copy">
+                  <span class="paid-proof-kicker">Paid media / Meta Ads</span>
+                  <h4>Biến insight thành creative để test.</h4>
+                  <p>Bên cạnh nội dung organic, mình phát triển các góc thông điệp và biến thể creative cho Meta Ads; phối hợp theo dõi phân phối, kết quả và phản hồi để tiếp tục tối ưu nội dung.</p>
+                  <ul class="paid-proof-list" aria-label="Hạng mục Meta Ads">
+                    <li>Creative angles</li><li>Ad variations</li><li>A/B testing</li><li>Performance review</li>
+                  </ul>
+                </div>
+                <figure class="paid-proof-media">
+                  <div class="paid-proof-image"><img src="meta-ads-manager.webp" loading="lazy" alt="Giao diện Meta Ads Manager với các chiến dịch đang hoạt động"></div>
+                  <figcaption>Giao diện vận hành chiến dịch Meta Ads trong quá trình triển khai và theo dõi creative.</figcaption>
+                </figure>
+              </article>
             </div>
           </article>
           <article class="project project--commerce" id="kocikids">
@@ -614,23 +635,10 @@
         </div>
       </section>
 
-      <section class="section method" id="quy-trinh">
+      <section class="section method" id="cong-cu">
         <div class="shell">
-          <div class="section-head">
-            <p class="section-kicker">02 / FRAMEWORK</p>
-            <div><h2>Research thành hệ thống, không chỉ là tìm trend.</h2><p class="section-copy" style="color:#aebbd0">Mình kết hợp dữ liệu nền tảng, hành vi social và hiệu suất creative để đi từ tín hiệu thị trường đến concept có thể test và scale.</p></div>
-          </div>
-          <div class="steps">
-            <article class="step"><h3>Scan tín hiệu</h3><p>Quét quảng cáo, trend, nội dung nổi bật và thảo luận đang tăng trên social.</p></article>
-            <article class="step"><h3>Decode insight</h3><p>Giải mã pain point, mong muốn, hook, offer và kiểu phản hồi của từng audience.</p></article>
-            <article class="step"><h3>Build angles</h3><p>Ghép vấn đề × mong muốn × mâu thuẫn để tạo nhiều góc kể cho cùng một brief.</p></article>
-            <article class="step"><h3>Prototype nhanh</h3><p>Dùng AI để dựng script, storyboard, hình ảnh và video nháp trước khi sản xuất.</p></article>
-            <article class="step"><h3>Test creative</h3><p>Thử nhiều hook, format, visual và CTA trên organic lẫn paid media.</p></article>
-            <article class="step"><h3>Learn &amp; scale</h3><p>Đọc retention, CTR, CVR và phản hồi để nhân rộng pattern đang thắng.</p></article>
-          </div>
-
           <div class="stack-intro">
-            <h3>Nền tảng giúp mình research và biến insight thành creative.</h3>
+            <div><p class="section-kicker">02 / RESEARCH &amp; AI</p><h3>Nền tảng giúp mình research và biến insight thành creative.</h3></div>
             <p>Mỗi công cụ đảm nhiệm một phần rõ ràng trong workflow, từ tìm tín hiệu, kiểm chứng ý tưởng đến sản xuất asset để test.</p>
           </div>
           <div class="stack-grid">
